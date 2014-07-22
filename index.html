@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Xero-net by XeroAPI</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Xero-net</h1>
+          <h2>A skinny wrapper of the Xero API. Supports Payroll.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/XeroAPI/Xero-Net/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/XeroAPI/Xero-Net/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/XeroAPI/Xero-Net" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="xero-net" class="anchor" href="#xero-net"><span class="octicon octicon-link"></span></a>Xero-Net</h1>
+
+<p>A skinny wrapper of the Xero API. Supports Payroll. All third party libraries are included as source code.</p>
+
+<ul>
+<li><a href="#what-is-supported">What is supported?</a></li>
+<li><a href="#things-to-note">Things to note</a></li>
+<li><a href="#samples">Samples</a></li>
+<li><a href="#querying">Querying</a></li>
+<li><a href="#application">Applications</a></li>
+<li><a href="#authenticators">Authenticators</a></li>
+<li><a href="#token-stores">Token Stores</a></li>
+<li><a href="#serialization">Serialization</a></li>
+<li><a href="#acknowledgements">Acknowledgements</a></li>
+<li><a href="#license">License</a></li>
+</ul><h2>
+<a name="what-is-supported" class="anchor" href="#what-is-supported"><span class="octicon octicon-link"></span></a>What is supported?</h2>
+
+<h3>
+<a name="core" class="anchor" href="#core"><span class="octicon octicon-link"></span></a>Core</h3>
+
+<ul>
+<li>Accounts - Find and Create</li>
+<li>Attachments - Add, Get and List</li>
+<li>Bank Transactions - Create, Find and Update</li>
+<li>Bank Transfers - Create, Find and Update</li>
+<li>Branding Themes - Find</li>
+<li>Contacts - Create, Find and Update</li>
+<li>Credit Notes - Create, Find and Update</li>
+<li>Currencies - Find</li>
+<li>Employees - Create, Find and Update</li>
+<li>Expense Claims - Create, Find and Update</li>
+<li>Invoices - Create, Find and Update</li>
+<li>Items - Create, Find and Update</li>
+<li>Journals - Find</li>
+<li>Manual Journals - Create, Find and Update</li>
+<li>Organisation - Find</li>
+<li>Payments - Create and Find</li>
+<li>Receipts - Create, Find and Update</li>
+<li>Repeating Invoices - Find</li>
+<li>Reports - Find</li>
+<li>Setup - Create and Update</li>
+<li>Tax Rates - Create, Find and Update</li>
+<li>Tracking Categories - Find</li>
+<li>Users - Find</li>
+</ul><h3>
+<a name="australian-payroll" class="anchor" href="#australian-payroll"><span class="octicon octicon-link"></span></a>Australian Payroll</h3>
+
+<ul>
+<li>Employees - Create and Find</li>
+<li>Leave Applications - Create and Find</li>
+<li>Pay Runs - Create and Find</li>
+<li>Payroll Calenders- Create and Find</li>
+<li>Pay Slips- Create and Find</li>
+<li>Settings - Find</li>
+<li>Super Fund Products - Find</li>
+<li>Super Funds - Create and Find</li>
+<li>Timesheets - Create and Find</li>
+</ul><h3>
+<a name="united-states-payroll" class="anchor" href="#united-states-payroll"><span class="octicon octicon-link"></span></a>United States Payroll</h3>
+
+<ul>
+<li>Employees - Create and Find</li>
+<li>Pay Runs - Create and Find</li>
+<li>Pay Schedules - Create and Find</li>
+<li>Pay Stubs- Create and Find</li>
+<li>Settings - Find</li>
+<li>Timesheets - Create and Find</li>
+<li>Work Locations - Create and Find</li>
+</ul><h2>
+<a name="things-to-note" class="anchor" href="#things-to-note"><span class="octicon octicon-link"></span></a>Things to note</h2>
+
+<ul>
+<li>The library tries to do as little as possible and provides a basis to be extended. There are examples of TokenStores, Authenticators and Application types. These examples provide enough to get you going, but are not a complete solution to all your needs. You will need to adapt them for your own use and situation. Private application will work out of the box, as they do not have to deal with tokens and OAuth.</li>
+<li>The HTTP verbs are not used in the public part of the API. Create, Update and Find are used instead. This seperates the inplmentation from the the intent.</li>
+<li>Invoices and Contacts support pagination. In the RESTful API these are off by default. For the wrapper, they are always on and default to page 1. See the Counts or Creation code examples for how to use the Page method to get all items.</li>
+<li>Contacts support including archived contacts. Like the RESTful API, this if off by default. Use IncluceArchived(true) to include them.</li>
+<li>Four decimal places are supported and are always on.</li>
+<li>You will need an instance of the API per user. The user is stored as part of the API instance.</li>
+</ul><h2>
+<a name="samples" class="anchor" href="#samples"><span class="octicon octicon-link"></span></a>Samples</h2>
+
+<p>There are samples for each of the API endpoints. These have been done as console application and also a collection of NUnit tests. See the README for each of the executable and test assemblies.</p>
+
+<h2>
+<a name="querying" class="anchor" href="#querying"><span class="octicon octicon-link"></span></a>Querying</h2>
+
+<p>There are simple filters on different endpoints.</p>
+
+<ul>
+<li>ModifiedSince</li>
+<li>Where</li>
+<li>Or</li>
+<li>And</li>
+<li>OrderBy</li>
+<li>OrderByDescending</li>
+<li>Page</li>
+<li>Offset</li>
+</ul><p>They are used in a <a href="http://en.wikipedia.org/wiki/Fluent_interface">Fluent</a> way, but are not LINQ. They simply create a query for the URL passed to the API. Nested queries are not handled using the syntax. Or and And need to come after a Where statement. OrderBy, OrderByDescending and Page can come anywhere.</p>
+
+<pre><code>var invoices = xeroApi.Invoices  
+    .ModifiedSince(new DateTime(2014, 1, 31))  
+    .Where("Total &gt; 3500.0")  
+    .And("Total &lt; 10000.0")  
+    .Page(2)  
+    .OrderByDescending("DueDate")  
+    .Find();
+</code></pre>
+
+<p>The following gives the same query string to the API as the example above.</p>
+
+<pre><code>var invoices = xeroApi.Invoices  
+    .Page(2)  
+    .OrderByDescending("DueDate")  
+    .Where("Total &gt; 3500.0")   
+    .And("Total &lt; 10000.0")  
+    .ModifiedSince(new DateTime(2014, 1, 31))  
+    .Find();
+</code></pre>
+
+<h2>
+<a name="application-types" class="anchor" href="#application-types"><span class="octicon octicon-link"></span></a>Application types</h2>
+
+<p>There are specific classes for each of the application types. If these are used, you will need to have the app.config file settings for your organisation.</p>
+
+<p>For a public application you would use</p>
+
+<pre><code>var user = new ApiUser { Name = "The users name" };
+var tokenStore = new SqliteTokenStore();
+
+var api = new Applications.Public.Core(tokenStore, user)
+{
+    UserAgent = "Something to show your application"
+};
+</code></pre>
+
+<p>The config file will look like this</p>
+
+<pre><code>&lt;add key="BaseUrl" value="https://api.xero.com"/&gt;
+&lt;add key="ConsumerKey" value="Your Key"/&gt;
+&lt;add key="ConsumerSecret" value="Your secret"/&gt;
+&lt;add key="CallbackUrl" value="Your callback"/&gt;
+</code></pre>
+
+<p>There are classes for Private, Public and Partner applications for the Core Xero API and Australian and American Payrolls.</p>
+
+<p>A private application will need to also populate</p>
+
+<pre><code>&lt;add key="SigningCertificate" value="Path to .pfx file"/&gt;
+</code></pre>
+
+<p>A partner application will need to also populate</p>
+
+<pre><code>&lt;add key="SigningCertificate" value="Path to .pfx file"/&gt;
+&lt;add key="PartnerCertificate" value="Path to Xero issued Entrust certificate file"/&gt;    
+</code></pre>
+
+<h2>
+<a name="authenticators" class="anchor" href="#authenticators"><span class="octicon octicon-link"></span></a>Authenticators</h2>
+
+<p>The application classes all use implementations of IAuthenticator. See <a href="https://github.com/XeroAPI/Xero-Net/blob/master/Xero.Api.Example.Applications/Private/PrivateAuthenticator.cs">PrivateAuthenticator</a> for an example. The authenticators are used by the base infrastructure to do the heavy lifting of the Xero API authentication.</p>
+
+<h3>
+<a name="privateauthenticator" class="anchor" href="#privateauthenticator"><span class="octicon octicon-link"></span></a>PrivateAuthenticator</h3>
+
+<p>Uses RSA-SHA1 and a public/private certificate. There are no tokens and each request has to be signed.</p>
+
+<h3>
+<a name="publicauthenticator" class="anchor" href="#publicauthenticator"><span class="octicon octicon-link"></span></a>PublicAuthenticator</h3>
+
+<p>Uses HMAC-SHA1 and the standard 3-legged <a href="http://tools.ietf.org/html/rfc6749">OAuth</a> process. Tokens last for 30 minutes and cannot be renewed.</p>
+
+<h3>
+<a name="partnerauthenticator" class="anchor" href="#partnerauthenticator"><span class="octicon octicon-link"></span></a>PartnerAuthenticator</h3>
+
+<p>Uses RSA-SHA1 and a Xero provider certificate and then the standard 3-legged <a href="http://tools.ietf.org/html/rfc6749">OAuth</a> process with an additional signing certificate. Tokens last for 30 minutes and be renewed. Token renewal is not currently handled by this provider, but will be done soon.</p>
+
+<h3>
+<a name="oauth-signing" class="anchor" href="#oauth-signing"><span class="octicon octicon-link"></span></a>OAuth signing</h3>
+
+<p>All the signing is done by a slightly modified version of the Dust library provided by <a href="https://github.com/ben-biddington/dust">Ben Biddington</a>. Source is included.</p>
+
+<h2>
+<a name="token-stores" class="anchor" href="#token-stores"><span class="octicon octicon-link"></span></a>Token Stores</h2>
+
+<p>The token store implementations are separate and optional. (It is recommended that you do have a store.)</p>
+
+<p>The interface ITokenStore has three methods.</p>
+
+<pre><code>public interface ITokenStore
+{
+    IConsumer Find(string user);
+    void Add(IToken token);
+    void Delete(IToken token);
+}
+</code></pre>
+
+<p>You can provide your own implementation to suit the database you are using for your product. Ensure the dates on the token are stored in UTC.</p>
+
+<p>The examples are</p>
+
+<ul>
+<li>MemoryTokenStore - Dictionary of token in RAM keyed on UserId</li>
+<li>SqliteTokenStore - A database of tokens (file on local disk). This does not support multiple add-ons in the same database. The tokens are only for the application the database was created by.</li>
+</ul><h2>
+<a name="serialization" class="anchor" href="#serialization"><span class="octicon octicon-link"></span></a>Serialization</h2>
+
+<p>All communication with the <a href="http://deverloper.xero.com">Xero API</a> is compressed at source. Writing to the API is done with XML. The data model classes have be attributed to give a small XML payload. All communication back from the API is JSON. These details are transparent to the user of the class library.</p>
+
+<h2>
+<a name="acknowledgements" class="anchor" href="#acknowledgements"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<p>Thanks for the following Open Source libraries for making the wrapper and samples easier</p>
+
+<ul>
+<li>
+<a href="https://github.com/ben-biddington/dust">Dust</a> - OAuth</li>
+<li>
+<a href="https://code.google.com/p/dapper-dot-net/">Dapper</a> - database access</li>
+<li>
+<a href="http://www.nunit.org/">NUnit</a> - unit tests</li>
+<li>
+<a href="https://github.com/ServiceStack/ServiceStack.Text/tree/v3">ServiceStack.Text</a> - serialization</li>
+<li>
+<a href="http://http://system.data.sqlite.org/">SQLite</a> - file based database</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This software is published under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a>.</p>
+
+<pre><code>Copyright (c) 2014 Xero Limited
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+</code></pre>
+        </section>
+
+        <footer>
+          Xero-net is maintained by <a href="https://github.com/XeroAPI">XeroAPI</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
