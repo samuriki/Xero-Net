@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace CoreTests.Unit
 {
     [TestFixture]
-    public class TrackingCategories : ApiWrapperTest
+    public class TrackingCategoriesTest : ApiWrapperTest
     {
         [Test]
         public void include_archived()

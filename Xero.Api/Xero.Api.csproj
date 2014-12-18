@@ -66,6 +66,7 @@
     <Compile Include="Core\Model\Status\OrganisationStatus.cs" />
     <Compile Include="Core\Request\ContactGroupsRequest.cs" />
     <Compile Include="Core\Request\SetupRequest.cs" />
+    <Compile Include="Core\Request\TrackingCategoriesRequest.cs" />
     <Compile Include="Core\Response\ContactGroupsResponse.cs" />
     <Compile Include="Core\Response\SetupResponse.cs" />
     <Compile Include="Infrastructure\Exceptions\RateExceededException.cs" />

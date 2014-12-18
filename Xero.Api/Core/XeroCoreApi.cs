@@ -159,6 +159,12 @@ namespace Xero.Api.Core
             return TaxRates.Create(items);
         }
 
+        public IEnumerable<TrackingCategory> Create(IEnumerable<TrackingCategory> items)
+        {
+            return TrackingCategories.Create(items);
+        }
+
+
         public IEnumerable<BankTransaction> Create(IEnumerable<BankTransaction> items)
         {
             return BankTransactions.Create(items);
@@ -239,6 +245,11 @@ namespace Xero.Api.Core
             return Setup.Create(item);
         }
 
+        public TrackingCategory Create(TrackingCategory item)
+        {
+            return TrackingCategories.Create(item);
+        }
+
         public Invoice Update(Invoice item)
         {
             return Invoices.Update(item);
@@ -297,6 +308,11 @@ namespace Xero.Api.Core
         public TaxRate Update(TaxRate item)
         {
             return TaxRates.Update(item);
+        }
+
+        public TrackingCategory Update(TrackingCategory item)
+        {
+            return TrackingCategories.Update(item);
         }
 
         public ImportSummary Update(Setup item)

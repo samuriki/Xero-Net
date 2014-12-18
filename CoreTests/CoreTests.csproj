@@ -103,6 +103,7 @@
     <Compile Include="Integration\Setup\Create.cs" />
     <Compile Include="Integration\TaxRates\Update.cs" />
     <Compile Include="Integration\TaxRates\TaxRateTest.cs" />
+    <Compile Include="Integration\TrackingCategories\TrackingCategoriesTest.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Integration\Invoices\Create.cs" />
     <Compile Include="Integration\Accounts\Create.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Integration\General\QueryStrings.cs" />
     <Compile Include="Unit\SalesTaxBasisTypeTest.cs" />
     <Compile Include="Unit\SalesTaxPeriodTypeTest.cs" />
-    <Compile Include="Unit\TrackingCategories.cs" />
+    <Compile Include="Unit\TrackingCategoriesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xero.Api.Example.Applications\Xero.Api.Example.Applications.csproj">
