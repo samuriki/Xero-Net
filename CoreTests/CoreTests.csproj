@@ -103,7 +103,10 @@
     <Compile Include="Integration\Setup\Create.cs" />
     <Compile Include="Integration\TaxRates\Update.cs" />
     <Compile Include="Integration\TaxRates\TaxRateTest.cs" />
+    <Compile Include="Integration\TrackingCategories\Create.cs" />
+    <Compile Include="Integration\TrackingCategories\Create_Option.cs" />
     <Compile Include="Integration\TrackingCategories\TrackingCategoriesTest.cs" />
+    <Compile Include="Integration\TrackingCategories\Update.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Integration\Invoices\Create.cs" />
     <Compile Include="Integration\Accounts\Create.cs" />
