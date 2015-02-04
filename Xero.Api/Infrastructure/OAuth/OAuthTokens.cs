@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using Xero.Api.Infrastructure.Http;
 using Xero.Api.Infrastructure.Interfaces;
@@ -14,7 +15,7 @@ namespace Xero.Api.Infrastructure.OAuth
         private const string XeroAccessTokenUri = "oauth/AccessToken";
         private const string XeroAuthorizeUri = "oauth/Authorize";
 
-        public OAuthTokens(string authorizeUri, string tokenUri)
+        public OAuthTokens(string tokenUri, string authorizeUri)
         {
             _authorizeUri = authorizeUri;
             _tokenUri = tokenUri;            
@@ -66,6 +67,9 @@ namespace Xero.Api.Infrastructure.OAuth
 
         public IToken GetToken(string baseUri, IToken consumer, string endPoint, string header)
         {
+
+            Debug.WriteLine("Connecting with " + baseUri+"/"+endPoint);
+            
             var req = new HttpClient(baseUri)
             {
                 UserAgent = "Xero Api wrapper - " + consumer.ConsumerKey

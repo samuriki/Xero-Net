@@ -32,18 +32,22 @@ namespace Xero.Api.Infrastructure.Http
         {
             _baseUri = baseUri;
             _headers = new Dictionary<string, string>();
+            Debug.WriteLine("1 -> _certAuth " + _certAuth);
         }
         
         public HttpClient(string baseUri, IConsumer consumer, IUser user) : this(baseUri)
         {
             User = user;
             Consumer = consumer;
+            Debug.WriteLine("2 -> _certAuth " + _certAuth);
         }
 
         public HttpClient(string baseUri, IAuthenticator auth, IConsumer consumer, IUser user)
             : this(baseUri, consumer, user)
         {
             _auth = auth;
+            Debug.WriteLine("3 -> _certAuth " + _certAuth);
+
         }
 
         public HttpClient(string baseUri, ICertificateAuthenticator auth, IConsumer consumer, IUser user)
@@ -51,6 +55,9 @@ namespace Xero.Api.Infrastructure.Http
         {
             _certAuth = auth;
             _auth = auth;
+
+            Debug.WriteLine("4 -> _certAuth " + _certAuth);
+
         }
 
         public string UserAgent

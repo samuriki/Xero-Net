@@ -17,7 +17,7 @@ namespace Xero.Api.Example.Applications
             CallBackUri = callBackUri;
             BaseUri = baseUri;
             Store = store;
-            Tokens = new OAuthTokens(baseUri, tokenUri);            
+            Tokens = new OAuthTokens (baseUri, tokenUri);            
         }
 
         public string GetSignature(IConsumer consumer, IUser user, Uri uri, string verb, IConsumer consumer1)

@@ -23,7 +23,12 @@ namespace Xero.Api.Example.Applications.Private
 
         public string GetSignature(IConsumer consumer, IUser user, Uri uri, string verb, IConsumer consumer1)
         {
-            return new RsaSha1Signer().CreateSignature(_certificate, new Token { ConsumerKey = consumer.ConsumerKey, ConsumerSecret = consumer.ConsumerSecret }, uri, verb);
+            return new RsaSha1Signer().CreateSignature(_certificate, new Token
+            {
+                TokenKey =consumer.ConsumerKey,
+                ConsumerKey = consumer.ConsumerKey, 
+                ConsumerSecret = consumer.ConsumerSecret
+            }, uri, verb);
         }
 
         public X509Certificate Certificate { get { return _certificate; } }
